@@ -4,6 +4,12 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
+/* Font */
+@font-face {
+    font-family: graffitti;
+    src: url(../fonts/MARSNEVENEKSK.otf);
+}
+
 /* Global Styles */
 
 html,
@@ -164,7 +170,9 @@ hr.small {
 
 .bigTitle {
     color: #FFFFFF;
+    font-family: graffitti;
     -webkit-text-stroke: 1px #000000;
+    font-size: 32px;
 }
 
 /* About */
@@ -175,12 +183,22 @@ hr.small {
 
 /* Services */
 
-.services {
+.signUp {
     padding: 50px 0;
 }
 
-.service-item {
+.signUp-item {
     margin-bottom: 30px;
+}
+
+.signUp-item form *{
+    color: #333;
+    width: 100%;
+    max-width: 32em;
+}
+
+.signUp-item label{
+    color: #FFF;
 }
 
 /* Callout */

@@ -22,7 +22,8 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     
     <!-- Angular -->
-    <link href="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    <script src="js/main.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +34,7 @@
 
 </head>
 
-<body>
+<body ng-controller="ballerController">
 
     <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
@@ -41,22 +42,34 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>Start Bootstrap</a>
+                <a href="#top" onclick=$("#menu-close").click();>
+                    Ballerz
+                </a>
             </li>
             <li>
-                <a href="#top" onclick=$("#menu-close").click();>Home</a>
+                <a href="#top" onclick=$("#menu-close").click();>
+                    Home
+                </a>
             </li>
             <li>
-                <a href="#about" onclick=$("#menu-close").click();>About</a>
+                <a href="#about" onclick=$("#menu-close").click();>
+                    About
+                </a>
             </li>
             <li>
-                <a href="#signUp" onclick=$("#menu-close").click();>Sign Up</a>
+                <a href="#signUp" onclick=$("#menu-close").click();>
+                    Sign Up
+                </a>
             </li>
             <li>
-                <a href="#currentGames" onclick=$("#menu-close").click();>Current Games</a>
+                <a href="#currentGames" onclick=$("#menu-close").click();>
+                    Current Games
+                </a>
             </li>
             <li>
-                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+                <a href="#contact" onclick=$("#menu-close").click();>
+                    Contact
+                </a>
             </li>
         </ul>
     </nav>
@@ -64,7 +77,7 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1 class="bigTitle">Ball.er</h1>
+            <h1 class="bigTitle">Ballerz</h1>
             <h3>Find local ballers</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
@@ -77,7 +90,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>
-                        Ball.er is the best way to find pickup basketball games
+                        Ballerz is the best way to find pickup basketball games
                         nearby.
                     </h2>
                     <p class="lead">
@@ -100,27 +113,44 @@
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
+                            <div class="signUp-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-dribbble fa-stack-1x text-primary"></i>
                             </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="signUp-item">
                                 <form>
                                     <label> Name
-                                        <input type="text"/>
+                                        <br>
+                                        <input type="text" ng-model="signUp['name']"/>
                                     </label>
                                     </br>
                                     <label> Phone Number
-                                        <input type="text"/>
+                                        <br>
+                                        <input type="text" ng-model="signUp['phone']"/>
                                     </label>
                                 </form>
-                                <a href="#" class="btn btn-light">Submit</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="signUp-item">
+                                <form>
+                                    <label> Schedule
+                                        <br>
+                                        <input type="text"/>
+                                    </label>
+                                    </br>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <a class="btn btn-light" ng-click="submit()">
+                                    Submit
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -143,25 +173,23 @@
     -->
 
     <!-- Portfolio -->
-    <section id="currentGames" class="portfolio">
+    <section id="upcomingGames" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h2>Current Games</h2>
                     <hr class="small">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                                </a>
+                        <div class="col-lg-10 col-lg-offset-1 text-center">
+                            <div class="upcomingGame-item">
+                                <div ng-repeat="game in upcomingGames">
+                                    <h2>{{game.location}}</h2>
+                                    <h3>Starting at {{game.time}}</h3>
+                                    <h3>{{game.numPlayers}} Players</h3>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- /.row (nested) -->
-                    <!--
-                    <a href="#" class="btn btn-dark">View More Items</a>
-                    -->
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -197,33 +225,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Start Bootstrap</strong>
+                    <h4><strong>Ballerz</strong>
                     </h4>
-                    <p>3481 Melrose Place
-                        <br>Beverly Hills, CA 90210</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">name@example.com</a>
-                        </li>
-                    </ul>
-                    <br>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; Your Website 2014</p>
+                    <p class="text-muted">
+                        Copyright &copy; Matt &amp; Jeff 2017
+                    </p>
                 </div>
             </div>
         </div>
-        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+        <a id="to-top" href="#top" class="btn btn-dark btn-lg">
+            <i class="fa fa-chevron-up fa-fw fa-1x"></i>
+        </a>
     </footer>
 
     <!-- jQuery -->
