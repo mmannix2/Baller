@@ -109,28 +109,26 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
+                    <div class="signUp-item">
+                    <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-dribbble fa-stack-1x text-primary"></i>
+                    </span>
+                    </div>
                     <h2>Sign Up</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
                             <div class="signUp-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-dribbble fa-stack-1x text-primary"></i>
-                            </span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="signUp-item">
                                 <form>
                                     <label> Name
                                         <br>
-                                        <input type="text" ng-model="signUp['name']"/>
+                                        <input type="text" ng-model="signUp.name"/>
                                     </label>
                                     </br>
                                     <label> Phone Number
                                         <br>
-                                        <input type="text" ng-model="signUp['phone']"/>
+                                        <input type="text" maxlength="10" ng-model="signUp.phone"/>
                                     </label>
                                 </form>
                             </div>
@@ -138,15 +136,102 @@
                         <div class="col-md-3 col-sm-6">
                             <div class="signUp-item">
                                 <form>
-                                    <label> Schedule
+                                    <label> When are you available?
                                         <br>
-                                        <input type="text"/>
+                                        <div class="available">
+                                        <ul>
+                                        <li>
+                                        <label>
+                                            Sun
+                                            <input type="checkbox" ng-model="signUp.available['sun']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Mon
+                                            <input type="checkbox" ng-model="signUp.available['mon']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Tue 
+                                            <input type="checkbox" ng-model="signUp.available['tue']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Wed
+                                            <input type="checkbox" ng-model="signUp.available['wed']"/>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Thur
+                                            <input type="checkbox" ng-model="signUp.available['thu']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Fri
+                                            <input type="checkbox" ng-model="signUp.available['fri']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Sat
+                                            <input type="checkbox" ng-model="signUp.available['sat']"/>
+                                        </label>
+                                        </li>
+                                        </div>
+                                        </ul>
                                     </label>
-                                    </br>
+                                    <br>
                                 </form>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
+                            <div class="signUp-item">
+                                <form>
+                                    <label> What level of play are you looking for?
+                                    <br>
+                                    <div class="intensity">
+                                    <ul>
+                                        <li>
+                                        <label>
+                                            Fun
+                                            <input type="checkbox" ng-model="signUp.intensity['fun']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Intense
+                                            <input type="checkbox" ng-model="signUp.intensity['intense']"/>
+                                        </label>
+                                        </li>
+                                        <li>
+                                        <label>
+                                            Hardcore
+                                            <input type="checkbox" ng-model="signUp.intensity['hardcore']"/>
+                                        </label>
+                                        </li>
+                                    </ul>
+                                    </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div>
+                            <form>
+                                <label>
+                                    Do you want a text reminder?
+                                    <input type="checkbox" ng-model="signUp.reminder"/>
+                                </label>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- /.row (nested) -->
+                    <div class="row">
+                        <div class="col-lg-10">
                             <div class="service-item">
                                 <a class="btn btn-light" ng-click="submit()">
                                     Submit
@@ -162,29 +247,20 @@
         </div>
         <!-- /.container -->
     </section>
-
-    <!-- Callout -->
-    <!--
-    <aside class="callout">
-        <div class="text-vertical-center">
-            <h1>Vertically Centered Text</h1>
-        </div>
-    </aside>
-    -->
-
     <!-- Portfolio -->
     <section id="upcomingGames" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Current Games</h2>
+                    <h2>Upcoming Games</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1 text-center">
                             <div class="upcomingGame-item">
                                 <div ng-repeat="game in upcomingGames">
                                     <h2>{{game.location}}</h2>
-                                    <h3>Starting at {{game.time}}</h3>
+                                    <h3>Tipoff at {{game.time}}</h3>
+                                    <h3>{{game.intensity}}</h3>
                                     <h3>{{game.numPlayers}} Players</h3>
                                 </div>
                             </div>
@@ -210,15 +286,6 @@
             </div>
         </div>
     </aside>
-
-    <!-- Map -->
-    <section id="contact" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small>
-            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-        </small>
-    </section>
 
     <!-- Footer -->
     <footer>
@@ -297,26 +364,6 @@
             }
         }
     });
-    // Disable Google Maps scrolling
-    // See http://stackoverflow.com/a/25904582/1607849
-    // Disable scroll zooming and bind back the click event
-    var onMapMouseleaveHandler = function(event) {
-        var that = $(this);
-        that.on('click', onMapClickHandler);
-        that.off('mouseleave', onMapMouseleaveHandler);
-        that.find('iframe').css("pointer-events", "none");
-    }
-    var onMapClickHandler = function(event) {
-            var that = $(this);
-            // Disable the click handler until the user leaves the map area
-            that.off('click', onMapClickHandler);
-            // Enable scrolling zoom
-            that.find('iframe').css("pointer-events", "auto");
-            // Handle the mouse leave event
-            that.on('mouseleave', onMapMouseleaveHandler);
-        }
-        // Enable map zooming with mouse scroll when the user clicks the map
-    $('.map').on('click', onMapClickHandler);
     </script>
 
 </body>

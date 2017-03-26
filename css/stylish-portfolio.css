@@ -7,7 +7,10 @@
 /* Font */
 @font-face {
     font-family: graffitti;
+    src: url(../fonts/Docallisme.ttf);
+    /*
     src: url(../fonts/MARSNEVENEKSK.otf);
+    */
 }
 
 /* Global Styles */
@@ -172,7 +175,6 @@ hr.small {
     color: #FFFFFF;
     font-family: graffitti;
     -webkit-text-stroke: 1px #000000;
-    font-size: 32px;
 }
 
 /* About */
@@ -195,6 +197,24 @@ hr.small {
     color: #333;
     width: 100%;
     max-width: 32em;
+}
+
+.available ul {
+padding: 0px;
+}
+
+.available li {
+    width: auto;
+    display: inline-block;
+}
+
+.intensity ul {
+padding: 0px;
+}
+
+.intensity li {
+    width: auto;
+    display: inline-block;
 }
 
 .signUp-item label{
