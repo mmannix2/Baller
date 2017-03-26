@@ -1,27 +1,63 @@
 var app = angular.module('ballerApp', []);
+//var socket = io.connect('https://' + document.domain + ':' + location.port + '/baller');
 
 app.controller('ballerController', function($scope) {
         
-        var socket = io.connect('https://' + document.domain + ':' + location.port + '/baller');
+        $scope.signUp = {
+            'name': '',
+            'phone': '',
+            'available': {
+                'sun': true,
+                'mon': true,
+                'tue': true,
+                'wed': true,
+                'thu': true,
+                'fri': true,
+                'sat': true
+            },
+            'intensity': {
+                'fun': false,
+                'intense': false,
+                'hardcore': false
+            },
+            'reminder': false
+        };
         
-        $scope.signUp = [];
-        $scope.signUp.available = {
-            'sun': true,
-            'mon': true,
-            'tue': true,
-            'wed': true,
-            'thu': true,
-            'fri': true,
-            'sat': true
+        $scope.startAGame = {
+            'address': '',
+            'city': '',
+            'state': '',
+            'zip': '',
+            'tipOff': '',
+            'day': '',
+            'intensity': {
+                'fun': false,
+                'intense': false,
+                'hardcore': false
+            }
         };
 
         $scope.upcomingGames = undefined; 
 
-        $scope.submit = function submit() {
-           console.log($scope.signUp); 
+        $scope.submitSignUp = function submitSignUp() {
+            console.log($scope.signUp); 
+            
+            //socket.emit('submitSignUp', signUp);
+        };
+        
+        $scope.submitStartAGame = function submitStartAGame() {
+            console.log($scope.startAGame); 
+            
+            //socket.emit('submitStartAGame', startAGame);
         };
 
+        /*
         socket.on('connect', function() {
             console.log('Connected.');
         });
+
+        socket.on('upcomingGamesLoaded', function(data) {
+            console.log(data);
+        });
+        */
 });

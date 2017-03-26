@@ -2,7 +2,7 @@
 import os
 import psycopg2
 import psycopg2.extras
-from flask import Flask, session, request, render_template, send_from_directory
+from flask import Flask, session, request, render_template
 from flask_socketio import SocketIO, emit
 import string
 
@@ -40,18 +40,32 @@ def addPlayer(info):
         print "Failed to add player"
         print e
 
-@socketio.on('connect', namespace='/')
+@socketio.on('connect', namespace='/baller')
 def loadUpcomingGames():
 	conn = connectToDB()
 	cur = conn.cursor()
-	
-	query = "SELECT * FROM games;"
+        
+        upcomingGames = [];
+
+	try:
+            query = cur.mogrify("SELECT * FROM games;");
+            cur.execute(query);
+            
+            results = cur.fetchall()
+            for result in results:
+                game = 'A'
+                print result[0]
+                upcomingGames.append(game)
+            
+        except Exception as e:
+            print "Whoopsie! %s" % e
+        
+        emit('upcomingGamesLoaded', upcomingGames)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])
 def mainIndex():
     return app.send_static_file('index.html')
-    #return send_from_directory('/home/ec2-user/Baller', 'index.html')
 
 # start the server
 if __name__ == '__main__':

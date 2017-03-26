@@ -228,7 +228,7 @@
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1">
                             <div class="service-item">
-                                <a class="btn btn-light" ng-click="submit()">
+                                <a class="btn btn-light" ng-click="submitSignUp()">
                                     Submit
                                 </a>
                             </div>
@@ -252,11 +252,14 @@
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1 text-center">
                             <div class="upcomingGame-item">
+                                <div ng-if="upcomingGames == undefined">
+                                    <h3>No up coming games planned.</h3>
+                                </div>
                                 <div ng-repeat="game in upcomingGames">
-                                    <h2>{{game.location}}</h2>
-                                    <h3>Tipoff at {{game.time}}</h3>
-                                    <h3>{{game.intensity}}</h3>
-                                    <h3>{{game.numPlayers}} Players</h3>
+                                    <h3>{{game.location}}</h3>
+                                    <h4>Tipoff at {{game.time}}</h4>
+                                    <h4>{{game.intensity}}</h4>
+                                    <h4>{{game.numPlayers}} Players</h4>
                                 </div>
                             </div>
                         </div>
@@ -272,11 +275,94 @@
     <!-- Call to Action -->
     <aside id="makeAGame" class="call-to-action bg-primary">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>The buttons below are impossible to resist.</h3>
-                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
-                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="signUp-item">
+                        <span class="fa-stack fa-4x">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-dribbble fa-stack-1x text-primary"></i>
+                        </span>
+                        <h2>Start a Game</h2>
+                        <hr class="small">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                <div class="signUp-item">
+                                    <h3>Where will the game take place?</h3>
+                                    <form>
+                                        <label>
+                                            Address
+                                            <br>
+                                            <input type="text" ng-model="startAGame.address">
+                                        </label>
+                                        <label>
+                                           City
+                                           <br>
+                                           <input type="text" ng-model="startAGame.city">
+                                        </label>
+                                        <label>
+                                            State
+                                            <br>
+                                            <input type="text" maxlength="2" ng-model="startAGame.state">
+                                        </label>
+                                        <label>
+                                            Zip Code
+                                            <br>
+                                            <input type="text" maxlength="5" ng-model="startAGame.zip">
+                                        </label>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="signUp-item">
+                                    <h3>When will the game take place?</h3>
+                                    <form>
+                                        <label>
+                                            Date
+                                            <br>
+                                            <input type="date" ng-model="startAGame.day"/>
+                                        </label>
+                                        <label>
+                                            Time
+                                            <br>
+                                            <input type="time" ng-model="startAGame.tipOff"/>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="signUp-item">
+                                    <form>
+                                        <h3>What will the level of play be?</h3>
+                                        <br>
+                                        <div class="intensity">
+                                        <ul>
+                                            <li>
+                                            <label>
+                                                Fun
+                                                <input type="radio" ng-model="startAGame.intensity['fun']">
+                                            </label>
+                                            </li>
+                                            <li>
+                                            <label>
+                                                Intense
+                                                <input type="radio" ng-model="startAGame.intensity['intense']">
+                                            </label>
+                                            </li>
+                                            <li>
+                                            <label>
+                                                Hardcore
+                                                <input type="radio" ng-model="startAGame.intensity['hardcore']">
+                                            </label>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-lg btn-light" ng-click="submitStartAGame()">Submit</a>
+                    </div>
                 </div>
             </div>
         </div>
