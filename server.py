@@ -19,7 +19,7 @@ def connectToDB():
     except:
         print("Can't connect to the database!")
 
-def addPlayer(dict info):
+def addPlayer(info):
     conn = connectToDB()
     cur = conn.cursor()
 
@@ -32,7 +32,7 @@ def addPlayer(dict info):
     intense = info['intense']
     hardcore = info['hardcore']
     
-    command = cur.mogrify("INSERT INTO players (phone, name, zipcode, ziprange, fun, intense, hardcore) VALUES (%s,%s,%s,%s,%s,%s,%s)",(phone, name, zipCode, zipRange, fun, intense, hardcore)
+    command = cur.mogrify("INSERT INTO players (phone, name, zipcode, ziprange, fun, intense, hardcore) VALUES (%s,%s,%s,%s,%s,%s,%s)",(phone, name, zipCode, zipRange, fun, intense, hardcore) )
     
     try:
         cur.execute(command)
@@ -53,6 +53,7 @@ def mainIndex():
 
 # start the server
 if __name__ == '__main__':
-	socketio.run(app, host-os.getenv('IP', '0.0.0.0'),
+	socketio.run(app, host=os.getenv('IP', '0.0.0.0'),
 	port = int(os.getenv('PORT', 8080)), debug=True)
+
 print "Starting server"
