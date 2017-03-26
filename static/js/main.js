@@ -1,8 +1,14 @@
 var app = angular.module('ballerApp', []);
-//var socket = io.connect('https://' + document.domain + ':' + location.port + '/baller');
+var socket = io.connect('http://' + document.domain + ':' + location.port + '/baller');
 
 app.controller('ballerController', function($scope) {
         
+        /*
+        $scope.invert = function invert(button) {
+            button = !(button);
+        };
+        */
+
         $scope.signUp = {
             'name': '',
             'phone': '',
@@ -37,21 +43,20 @@ app.controller('ballerController', function($scope) {
             }
         };
 
-        $scope.upcomingGames = undefined; 
+        $scope.upcomingGames = []; 
 
         $scope.submitSignUp = function submitSignUp() {
             console.log($scope.signUp); 
             
-            //socket.emit('submitSignUp', signUp);
+            socket.emit('submitSignUp', signUp);
         };
         
         $scope.submitStartAGame = function submitStartAGame() {
             console.log($scope.startAGame); 
             
-            //socket.emit('submitStartAGame', startAGame);
+            socket.emit('submitStartAGame', startAGame);
         };
 
-        /*
         socket.on('connect', function() {
             console.log('Connected.');
         });
@@ -59,5 +64,4 @@ app.controller('ballerController', function($scope) {
         socket.on('upcomingGamesLoaded', function(data) {
             console.log(data);
         });
-        */
 });

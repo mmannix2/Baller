@@ -22,9 +22,12 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     
     <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
-    <script src="js/main.js"></script>
-
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+    
+    <!-- socketio -->
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.js"></script>
+    
+    <script type="text/javascript" src="js/main.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -130,8 +133,8 @@
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="signUp-item">
+                                <h3>When are you available?</h3>
                                 <form>
-                                    <label> When are you available?
                                         <br>
                                         <div class="available">
                                         <ul>
@@ -178,15 +181,14 @@
                                         </li>
                                         </div>
                                         </ul>
-                                    </label>
                                     <br>
                                 </form>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="signUp-item">
+                                <h3> What level of play are you looking for?</h3>
                                 <form>
-                                    <label> What level of play are you looking for?
                                     <br>
                                     <div class="intensity">
                                     <ul>
@@ -209,17 +211,14 @@
                                         </label>
                                         </li>
                                     </ul>
-                                    </label>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div>
+                            <h3>Do you want a text reminder?</h3>
                             <form>
-                                <label>
-                                    Do you want a text reminder?
                                     <input type="checkbox" ng-model="signUp.reminder"/>
-                                </label>
                             </form>
                         </div>
                     </div>
@@ -252,14 +251,16 @@
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1 text-center">
                             <div class="upcomingGame-item">
-                                <div ng-if="upcomingGames == undefined">
+                                <div ng-show="upcomingGames.length == 0">
                                     <h3>No up coming games planned.</h3>
                                 </div>
-                                <div ng-repeat="game in upcomingGames">
-                                    <h3>{{game.location}}</h3>
-                                    <h4>Tipoff at {{game.time}}</h4>
-                                    <h4>{{game.intensity}}</h4>
-                                    <h4>{{game.numPlayers}} Players</h4>
+                                <div ng-hide="upcomingGames.length == 0">
+                                    <div ng-repeat="game in upcomingGames">
+                                        <h3>{{game.location}}</h3>
+                                        <h4>Tipoff at {{game.time}}</h4>
+                                        <h4>{{game.intensity}}</h4>
+                                        <h4>{{game.numPlayers}} Players</h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -332,8 +333,8 @@
                             </div>
                             <div class="col-md-3 col-sm-6">
                                 <div class="signUp-item">
+                                    <h3>What will the level of play be?</h3>
                                     <form>
-                                        <h3>What will the level of play be?</h3>
                                         <br>
                                         <div class="intensity">
                                         <ul>
