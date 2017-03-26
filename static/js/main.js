@@ -3,12 +3,6 @@ var socket = io.connect('http://' + document.domain + ':' + location.port + '/ba
 
 app.controller('ballerController', function($scope) {
         
-        /*
-        $scope.invert = function invert(button) {
-            button = !(button);
-        };
-        */
-
         $scope.signUp = {
             'name': '',
             'phone': '',
@@ -26,7 +20,6 @@ app.controller('ballerController', function($scope) {
                 'intense': false,
                 'hardcore': false
             },
-            'reminder': false
         };
         
         $scope.startAGame = {
@@ -63,5 +56,7 @@ app.controller('ballerController', function($scope) {
 
         socket.on('upcomingGamesLoaded', function(data) {
             console.log(data);
+            $scope.upcomingGames = data;
+            $scope.$apply();
         });
 });

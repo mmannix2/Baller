@@ -41,3 +41,9 @@ CREATE TABLE registered(
 
 INSERT INTO registered (phone, gameID) VALUES ('5406661234', 1);
 INSERT INTO registered (phone, gameID) VALUES ('1234567890', 1);
+
+GRANT ALL ON games to jeff;
+GRANT ALL ON games_id_seq to jeff;
+GRANT ALL ON players to jeff;
+GRANT ALL ON registered to jeff;
+GRANT ALL ON registered_gameid_seq to jeff;

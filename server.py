@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 def connectToDB():
-    connectString = 'dbname=basket user=jeff password=hack host=localhost'
+    connectString = 'dbname=basket user=jeff password=hack'
     try:
         print("Connected to the database!")
         return psycopg2.connect(connectString)
@@ -37,9 +37,11 @@ def addPlayer(info):
     
     try:
         cur.execute(command)
+        cur.commit()
     except Exception as e:
         print "Failed to add player"
         print e
+        cur.rollback()
 
 @socketio.on('connect', namespace='/baller')
 def loadUpcomingGames():
@@ -54,15 +56,31 @@ def loadUpcomingGames():
             
             results = cur.fetchall()
             for result in results:
-                game = result
-                print result[0]
+                #handle tipOff
+                tipOffStr = str(result[5].hour) + ":" + '{:02d}'.format(result[5].minute)
+
+                #handle day
+                dayStr = str(result[6].month) + '/' + str(result[6].day) + '/' + str(result[6].year)
+                
+                game = {
+                    'address' : result[1],
+                    'city' : result[2],
+                    'state' : result[3],
+                    'zip' : result[4],
+                    'tipOff' : tipOffStr,
+                    'day' : dayStr,
+                    'intensity' : {
+                        'fun' : result[7],
+                        'intense' : result[8],
+                        'hardcore' : result[9]
+                    }
+                }
                 upcomingGames.append(game)
             
         except Exception as e:
             print "Whoopsie! %s" % e
         
         emit('upcomingGamesLoaded', upcomingGames)
-        print upcomingGames
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])

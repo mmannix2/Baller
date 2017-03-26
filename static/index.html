@@ -215,12 +215,6 @@
                                 </form>
                             </div>
                         </div>
-                        <div>
-                            <h3>Do you want a text reminder?</h3>
-                            <form>
-                                    <input type="checkbox" ng-model="signUp.reminder"/>
-                            </form>
-                        </div>
                     </div>
                     <br>
                     <!-- /.row (nested) -->
@@ -254,13 +248,9 @@
                                 <div ng-show="upcomingGames.length == 0">
                                     <h3>No up coming games planned.</h3>
                                 </div>
-                                <div ng-hide="upcomingGames.length == 0">
-                                    <div ng-repeat="game in upcomingGames">
-                                        <h3>{{game.location}}</h3>
-                                        <h4>Tipoff at {{game.time}}</h4>
-                                        <h4>{{game.intensity}}</h4>
-                                        <h4>{{game.numPlayers}} Players</h4>
-                                    </div>
+                                <div ng-repeat="game in upcomingGames">
+                                    <h3>{{ game.address }}</h3>
+                                    <h4>Tipoff at {{ game.tipOff }}</h4>
                                 </div>
                             </div>
                         </div>
