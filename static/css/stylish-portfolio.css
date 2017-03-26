@@ -7,7 +7,7 @@
 /* Font */
 @font-face {
     font-family: graffitti;
-    src: url(../fonts/Whoa!.ttf);
+    src: url(../fonts/whoa!.ttf);
 }
 
 /* Global Styles */
@@ -172,7 +172,7 @@ hr.small {
 .bigTitle {
     color: #FFFFFF;
     font-family: graffitti;
-    -webkit-text-stroke: 1px #000000;
+    -webkit-text-stroke: 2px #000000;
 }
 
 .subTitle {
