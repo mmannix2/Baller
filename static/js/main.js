@@ -6,6 +6,8 @@ app.controller('ballerController', function($scope) {
         $scope.signUp = {
             'name': '',
             'phone': '',
+            'zip': '',
+            'zipRange': '',
             'available': {
                 'sun': true,
                 'mon': true,
@@ -41,7 +43,23 @@ app.controller('ballerController', function($scope) {
         $scope.submitSignUp = function submitSignUp() {
             console.log($scope.signUp); 
             
-            socket.emit('submitSignUp', signUp);
+            socket.emit('submitSignUp', {
+                'signUp': signUp
+            });
+            /*
+                'name': signUp.name,
+                'phone': signUp.phone,
+                'zip': signUp.zip,
+                'zipRange': signUp.zipRange,
+                'available': signUp.available,
+            });
+            */
+                /*
+                'fun': signUp.intensity['fun'],
+                'intense': signUp.intensity['intense'],
+                'hardcore': signUp.intensity['hardcore']
+            });
+                */
         };
         
         $scope.submitStartAGame = function submitStartAGame() {

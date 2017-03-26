@@ -2,7 +2,6 @@
 <html ng-app="ballerApp" lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +33,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 
 <body ng-controller="ballerController">
@@ -127,6 +125,21 @@
                                     <label> Phone Number
                                         <br>
                                         <input type="text" maxlength="10" ng-model="signUp.phone"/>
+                                    </label>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="signUp-item">
+                                <form>
+                                    <label> Zip Code
+                                        <br>
+                                        <input type="text" ng-model="signUp.zip"/>
+                                    </label>
+                                    </br>
+                                    <label> Zip Code Range
+                                        <br>
+                                        <input type="text" maxlength="10" ng-model="signUp.zipRange"/>
                                     </label>
                                 </form>
                             </div>

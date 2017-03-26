@@ -20,28 +20,33 @@ def connectToDB():
     except:
         print("Can't connect to the database!")
 
+@socketio.on('submitSignUp', namespace='/baller')
 def addPlayer(info):
     conn = connectToDB()
     cur = conn.cursor()
-
-    phone=info['phone']
-    zipCode=info['zip']
-    zipRange=info['zipR']
-    name = info['name']
-    intensity = info['intensity']
-    fun = info['fun']
-    intense = info['intense']
-    hardcore = info['hardcore']
     
-    command = cur.mogrify("INSERT INTO players (phone, name, zipcode, ziprange, fun, intense, hardcore) VALUES (%s,%s,%s,%s,%s,%s,%s)",(phone, name, zipCode, zipRange, fun, intense, hardcore) )
+    print "Info: " + str(info)
     
-    try:
-        cur.execute(command)
-        cur.commit()
-    except Exception as e:
-        print "Failed to add player"
-        print e
-        cur.rollback()
+    if len(info) > 0:
+        phone = info.phone
+        zipCode=info['zip']
+        zipRange=info['zipR']
+        name = info['name']
+        fun = info['fun']
+        intense = info['intense']
+        hardcore = info['hardcore']
+        
+        command = cur.mogrify("INSERT INTO players (phone, name, zipcode, ziprange, fun, intense, hardcore) VALUES (%s,%s,%s,%s,%s,%s,%s)",(phone, name, zipCode, zipRange, fun, intense, hardcore) )
+        
+        try:
+            cur.execute(command)
+            cur.commit()
+        except Exception as e:
+            print "Failed to add player"
+            print e
+            cur.rollback()
+    else:
+        print "Info was empty."
 
 @socketio.on('connect', namespace='/baller')
 def loadUpcomingGames():
