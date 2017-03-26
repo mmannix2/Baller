@@ -1,8 +1,14 @@
 var app = angular.module('ballerApp', []);
-//var socket = io.connect('https://' + document.domain + ':' + location.port + '/baller');
+var socket = io.connect('https://' + document.domain + ':' + location.port + '/baller');
 
 app.controller('ballerController', function($scope) {
         
+        /*
+        $scope.invert = function invert(button) {
+            button = !(button);
+        };
+        */
+
         $scope.signUp = {
             'name': '',
             'phone': '',
@@ -37,7 +43,7 @@ app.controller('ballerController', function($scope) {
             }
         };
 
-        $scope.upcomingGames = undefined; 
+        $scope.upcomingGames = []; 
 
         $scope.submitSignUp = function submitSignUp() {
             console.log($scope.signUp); 
