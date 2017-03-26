@@ -11,6 +11,35 @@ app.config['SECRET_KEY'] = 'secret!'
 
 socketio = SocketIO(app)
 
+def connectToDB():
+    connectString = 'dbname=basket user=jeff password=hack host=localhost'
+    try:
+        print("Connected to the database!")
+        return psycopg2.connect(connectString)
+    except:
+        print("Can't connect to the database!")
+
+def addPlayer(dict info):
+    conn = connectToDB()
+    cur = conn.cursor()
+
+    phone=info['phone']
+    zipCode=info['zip']
+    zipRange=info['zipR']
+    name = info['name']
+    intensity = info['intensity']
+    fun = info['fun']
+    intense = info['intense']
+    hardcore = info['hardcore']
+    
+    command = cur.mogrify("INSERT INTO players (phone, name, zipcode, ziprange, fun, intense, hardcore) VALUES (%s,%s,%s,%s,%s,%s,%s)",(phone, name, zipCode, zipRange, fun, intense, hardcore)
+    
+    try:
+        cur.execute(command)
+    except Exception as e:
+        print "Failed to add player"
+        print e
+
 @socketio.on('connect', namespace='/')
 def loadUpcomingGames():
 	conn = connectToDB()
