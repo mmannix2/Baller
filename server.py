@@ -5,6 +5,7 @@ import psycopg2.extras
 from flask import Flask, session, request, render_template
 from flask_socketio import SocketIO, emit
 import string
+import json
 
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
@@ -53,7 +54,7 @@ def loadUpcomingGames():
             
             results = cur.fetchall()
             for result in results:
-                game = 'A'
+                game = result
                 print result[0]
                 upcomingGames.append(game)
             
@@ -61,6 +62,7 @@ def loadUpcomingGames():
             print "Whoopsie! %s" % e
         
         emit('upcomingGamesLoaded', upcomingGames)
+        print upcomingGames
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index.html', methods=['GET', 'POST'])
@@ -71,5 +73,5 @@ def mainIndex():
 if __name__ == '__main__':
 	socketio.run(app, host=os.getenv('IP', '0.0.0.0'),
 	port = int(os.getenv('PORT', 80)), debug=True)
-
+        
 print "Starting server"
