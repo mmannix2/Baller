@@ -13,7 +13,7 @@ def main(args):
     #reminders?
     
     #parse args for gmail login info
-    if args != 3:
+    if len(args) != 3:
         #Not enough arguments
         print 'Usage %s gmail_user gmail_password' % args[0]
         return -1
